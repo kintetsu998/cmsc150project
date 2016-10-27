@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Artificial Dietician</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
