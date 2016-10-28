@@ -14,21 +14,21 @@
     tools:showIn="@layout/activity_main">
 
     <Button
-        android:text="View Recipe"
+        android:text="@string/view_previous_diet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/create_recipe"
-        android:layout_alignStart="@+id/create_recipe"
+        android:layout_below="@+id/create_diet"
+        android:layout_alignStart="@+id/create_diet"
         android:layout_marginTop="28dp"
-        android:id="@+id/view_recipe"
-        android:layout_alignEnd="@+id/create_recipe"
+        android:id="@+id/view_diet"
+        android:layout_alignEnd="@+id/create_diet"
         android:background="@color/colorAccent" />
 
     <Button
-        android:text="Create new recipe"
+        android:text="@string/create_new_diet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/create_recipe"
+        android:id="@+id/create_diet"
         android:layout_marginTop="138dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
