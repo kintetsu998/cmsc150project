@@ -1,8 +1,11 @@
 package com.kintetsu.cmsc150.artificialdietician;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
 
 /**
  * Created by Aspire V3 on 10/28/2016.
@@ -17,6 +20,7 @@ public class Database extends SQLiteOpenHelper {
     private static final String FOOD_PRICE              = "price";
     private static final String FOOD_SERVE_SIZE         = "serving_size";
     private static final String FOOD_CALORIES           = "calories";
+    private static final String FOOD_CHOLESTEROL        = "cholesterol";
     private static final String FOOD_FAT                = "fat";
     private static final String FOOD_SODIUM             = "sodium";
     private static final String FOOD_CARBS              = "carbohydrates";
@@ -42,19 +46,20 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + FOOD_TABLE + " (" +
-                FOOD_NAME       + " VARCHAR(255) PRIMARY KEY," +
-                FOOD_PRICE      + " DECIMAL(5, 2) NOT NULL," +
-                FOOD_SERVE_SIZE  + " VARCHAR(63) NOT NULL," +
-                FOOD_CALORIES   + " DECIMAL(10, 2) NOT NULL," +
-                FOOD_FAT        + " DECIMAL(10, 2) NOT NULL," +
-                FOOD_SODIUM     + " DECIMAL(10, 2) NOT NULL," +
-                FOOD_CARBS      + " DECIMAL(10, 2) NOT NULL," +
-                FOOD_FIBER      + " DECIMAL(10, 2) NOT NULL," +
-                FOOD_PROTEIN    + " DECIMAL(10, 2) NOT NULL," +
-                FOOD_VIT_A      + " DECIMAL(10, 2) NOT NULL," +
-                FOOD_VIT_C      + " DECIMAL(10, 2) NOT NULL," +
-                FOOD_CALCIUM    + " DECIMAL(10, 2) NOT NULL," +
-                FOOD_IRON       + " DECIMAL(10, 2) NOT NULL);"
+                FOOD_NAME           + " VARCHAR(255) PRIMARY KEY," +
+                FOOD_PRICE          + " DECIMAL(5, 2) NOT NULL," +
+                FOOD_SERVE_SIZE     + " VARCHAR(63) NOT NULL," +
+                FOOD_CALORIES       + " DECIMAL(10, 2) NOT NULL," +
+                FOOD_CHOLESTEROL    + " DECIMAL(10, 2) NOT NULL," +
+                FOOD_FAT            + " DECIMAL(10, 2) NOT NULL," +
+                FOOD_SODIUM         + " DECIMAL(10, 2) NOT NULL," +
+                FOOD_CARBS          + " DECIMAL(10, 2) NOT NULL," +
+                FOOD_FIBER          + " DECIMAL(10, 2) NOT NULL," +
+                FOOD_PROTEIN        + " DECIMAL(10, 2) NOT NULL," +
+                FOOD_VIT_A          + " DECIMAL(10, 2) NOT NULL," +
+                FOOD_VIT_C          + " DECIMAL(10, 2) NOT NULL," +
+                FOOD_CALCIUM        + " DECIMAL(10, 2) NOT NULL," +
+                FOOD_IRON           + " DECIMAL(10, 2) NOT NULL);"
         );
 
         db.execSQL("CREATE TABLE " + DIET_TABLE + " (" +
@@ -210,6 +215,37 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + DIET_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + DIET_FOOD_TABLE);
         onCreate(db);
+    }
+
+    public Food getFood(String name) {
+        //TODO Get a food given food name
+        return null;
+    }
+
+    public ArrayList<String> getFoods() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + FOOD_NAME + " FROM " + FOOD_TABLE + " ORDER BY " + FOOD_NAME;
+        ArrayList<String> foodNames = new ArrayList<>();
+        Cursor res = db.rawQuery(query, null);
+        res.moveToFirst();
+
+        while(!res.isLast()) {
+            foodNames.add(res.getString(res.getColumnIndex(FOOD_NAME)));
+            res.moveToNext();
+        }
+
+        res.close();
+        return foodNames;
+    }
+
+    public Diet getDiet(String name) {
+        //TODO Get the diet and the food included given diet name
+        return null;
+    }
+
+    public ArrayList<String> getDiets() {
+        //TODO Get all diet names
+        return null;
     }
 
     public static Database getInstance(Context context) {
