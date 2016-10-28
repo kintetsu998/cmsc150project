@@ -13,4 +13,24 @@
     tools:context="com.kintetsu.cmsc150.artificialdietician.MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <Button
+        android:text="View Recipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/create_recipe"
+        android:layout_alignStart="@+id/create_recipe"
+        android:layout_marginTop="28dp"
+        android:id="@+id/view_recipe"
+        android:layout_alignEnd="@+id/create_recipe"
+        android:background="@color/colorAccent" />
+
+    <Button
+        android:text="Create new recipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/create_recipe"
+        android:layout_marginTop="138dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorAccent2" />
 </RelativeLayout>
