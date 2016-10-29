@@ -3,4 +3,23 @@
     <string name="title_activity_main">Choose Action</string>
     <string name="view_previous_diet">View previous diet</string>
     <string name="create_new_diet">Create new diet</string>
+    <string name="title_activity_view_food">Select Foods</string>
+    <string name="add">+</string>
+    <string name="details"><![CDATA[>>]]></string>
+    <string name="title_activity_inspect_food">Inspect Food</string>
+    <string name="serving_size">Serving Size:</string>
+    <string name="price_serving">Price/Serving:</string>
+    <string name="food_name">Food Name</string>
+    <string name="calories">Calories:</string>
+    <string name="cholesterol_mg">Cholesterol (mg):</string>
+    <string name="total_fat_g">Total Fat (g):</string>
+    <string name="sodium_mg">Sodium (mg):</string>
+    <string name="carbohydrates_g">Carbohydrates (g):</string>
+    <string name="dietary_fiber_g">Dietary Fiber (g):</string>
+    <string name="protein_g">Protein (g):</string>
+    <string name="vitamin_a_iu">Vitamin A (IU):</string>
+    <string name="vitamin_c_iu">Vitamin C (IU):</string>
+    <string name="calcium_mg">Calcium (mg):</string>
+    <string name="iron_mg">Iron (mg):</string>
+    <string name="close">Close</string>
 </resources>

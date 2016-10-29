@@ -1,5 +1,6 @@
 package com.kintetsu.cmsc150.artificialdietician;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setLogo(R.mipmap.ic_toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         Button create_diet = (Button) findViewById(R.id.create_diet);
@@ -33,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
         create_diet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Create Diet", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(MainActivity.this, ViewFoodActivity.class);
+                startActivity(i);
             }
         });
 

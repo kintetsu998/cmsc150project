@@ -10,8 +10,8 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
             android:name=".SplashScreenActivity"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden">
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,14 +20,29 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_main"
-            android:parentActivityName=".SplashScreenActivity"
-            android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden">
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".ViewFoodActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_view_food"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.kintetsu.cmsc150.artificialdietician.SplashScreenActivity" />
+                android:value="com.kintetsu.cmsc150.artificialdietician.MainActivity" />
+        </activity>
+        <activity
+            android:name=".InspectFoodActivity"
+            android:label="@string/title_activity_inspect_food"
+            android:parentActivityName=".ViewFoodActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kintetsu.cmsc150.artificialdietician.ViewFoodActivity" />
         </activity>
     </application>
 

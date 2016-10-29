@@ -1,9 +1,12 @@
-package com.kintetsu.cmsc150.artificialdietician;
+package com.kintetsu.cmsc150.artificialdietician.util;
 
-import android.content.Context;
+import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.kintetsu.cmsc150.artificialdietician.model.Diet;
+import com.kintetsu.cmsc150.artificialdietician.model.Food;
 
 import java.util.ArrayList;
 
@@ -39,8 +42,8 @@ public class Database extends SQLiteOpenHelper {
 
     private static Database instance;
 
-    private Database(Context context) {
-        super(context, DATABASE_NAME, null, VERSION);
+    private Database(Activity a) {
+        super(a.getApplicationContext(), DATABASE_NAME, null, VERSION);
     }
 
     @Override
@@ -254,9 +257,9 @@ public class Database extends SQLiteOpenHelper {
         return null;
     }
 
-    public static Database getInstance(Context context) {
+    public static Database getInstance(Activity a) {
         if(instance == null) {
-            instance = new Database(context);
+            instance = new Database(a);
         }
 
         return instance;

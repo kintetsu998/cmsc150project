@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:clickable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_margin="3dp"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        tools:ignore="UselessParent">
+        <CheckBox
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCheckBox" />
+        <TextView
+            android:text=""
+            android:layout_height="match_parent"
+            android:id="@+id/foodName"
+            android:layout_weight="15"
+            android:layout_width="0dp"
+            android:gravity="center_vertical" />
+        <TextView
+            android:text="@string/details"
+            android:layout_height="match_parent"
+            android:id="@+id/details"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:gravity="center_vertical|end"
+            android:textColor="@color/colorAccent" />
+    </LinearLayout>
+</RelativeLayout>

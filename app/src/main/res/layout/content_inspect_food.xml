@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_inspect_food"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.kintetsu.cmsc150.artificialdietician.InspectFoodActivity"
+    tools:showIn="@layout/activity_inspect_food">
+
+    <TextView
+        android:text="@string/food_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/foodNameView"
+        android:textSize="25sp"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:text="@string/serving_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/serveSizeLabel"
+        android:layout_below="@+id/priceLabel"
+        android:layout_alignParentStart="true"
+        android:layout_margin="3dp"
+        android:textColor="@android:color/darker_gray" />
+
+    <TextView
+        android:text="@string/price_serving"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/foodNameView"
+        android:layout_alignParentStart="true"
+        android:id="@+id/priceLabel"
+        android:layout_margin="3dp"
+        android:textColor="@android:color/darker_gray" />
+
+    <TextView
+        android:text="@string/calories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/caloriesLabel"
+        android:layout_below="@+id/serveSizeLabel"
+        android:layout_alignParentStart="true"
+        android:layout_margin="3dp"
+        android:textColor="@android:color/darker_gray" />
+
+    <TextView
+        android:text="@string/cholesterol_mg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/caloriesLabel"
+        android:layout_alignParentStart="true"
+        android:id="@+id/cholesterolLabel"
+        android:layout_margin="3dp"
+        android:textColor="@android:color/darker_gray" />
+
+    <TextView
+        android:text="@string/total_fat_g"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cholesterolLabel"
+        android:layout_alignParentStart="true"
+        android:id="@+id/fatLabel"
+        android:layout_margin="3dp"
+        android:textColor="@android:color/darker_gray" />
+
+    <TextView
+        android:text="@string/sodium_mg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fatLabel"
+        android:layout_alignParentStart="true"
+        android:id="@+id/sodiumLabel"
+        android:layout_margin="3dp"
+        android:textColor="@android:color/darker_gray" />
+
+    <TextView
+        android:text="@string/carbohydrates_g"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sodiumLabel"
+        android:layout_alignParentStart="true"
+        android:id="@+id/carbsLabel"
+        android:layout_margin="3dp"
+        android:textColor="@android:color/darker_gray" />
+
+    <TextView
+        android:text="@string/dietary_fiber_g"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/carbsLabel"
+        android:layout_alignParentStart="true"
+        android:id="@+id/fiberLabel"
+        android:layout_margin="3dp"
+        android:textColor="@android:color/darker_gray" />
+
+    <TextView
+        android:text="@string/protein_g"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fiberLabel"
+        android:layout_alignParentStart="true"
+        android:id="@+id/proteinLabel"
+        android:layout_margin="3dp"
+        android:textColor="@android:color/darker_gray" />
+
+    <TextView
+        android:text="@string/vitamin_a_iu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/proteinLabel"
+        android:layout_alignParentStart="true"
+        android:id="@+id/vitALabel"
+        android:layout_margin="3dp"
+        android:textColor="@android:color/darker_gray" />
+
+    <TextView
+        android:text="@string/vitamin_c_iu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vitALabel"
+        android:layout_alignParentStart="true"
+        android:id="@+id/vitCLabel"
+        android:layout_margin="3dp"
+        android:textColor="@android:color/darker_gray" />
+
+    <TextView
+        android:text="@string/iron_mg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/calciumLabel"
+        android:layout_alignParentStart="true"
+        android:id="@+id/ironLabel"
+        android:layout_margin="3dp"
+        android:textColor="@android:color/darker_gray" />
+
+    <TextView
+        android:text="@string/calcium_mg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vitCLabel"
+        android:layout_alignParentStart="true"
+        android:id="@+id/calciumLabel"
+        android:layout_margin="3dp"
+        android:textColor="@android:color/darker_gray"/>
+
+    <TextView
+        android:text="Price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/priceField"
+        android:layout_alignBottom="@+id/priceLabel"
+        android:textColor="@android:color/black"
+        android:layout_alignTop="@+id/priceLabel"
+        android:layout_alignParentEnd="true"
+        android:gravity="end" />
+
+    <TextView
+        android:text="Calories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/caloriesField"
+        android:layout_alignBaseline="@+id/caloriesLabel"
+        android:layout_alignBottom="@+id/caloriesLabel"
+        android:layout_alignParentEnd="true"
+        android:gravity="end"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:text="Serve Size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/serveSizeField"
+        android:layout_alignBaseline="@+id/serveSizeLabel"
+        android:layout_alignBottom="@+id/serveSizeLabel"
+        android:layout_alignParentEnd="true"
+        android:gravity="end"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:text="Cholesterol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cholesterolField"
+        android:layout_alignBaseline="@+id/cholesterolLabel"
+        android:layout_alignBottom="@+id/cholesterolLabel"
+        android:layout_alignParentEnd="true"
+        android:gravity="end"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:text="Fat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fatField"
+        android:layout_alignBaseline="@+id/fatLabel"
+        android:layout_alignBottom="@+id/fatLabel"
+        android:layout_alignParentEnd="true"
+        android:gravity="end"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:text="Sodium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sodiumField"
+        android:layout_alignBaseline="@+id/sodiumLabel"
+        android:layout_alignBottom="@+id/sodiumLabel"
+        android:layout_alignParentEnd="true"
+        android:gravity="end"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:text="Carbohydrates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/carbsField"
+        android:layout_alignBaseline="@+id/carbsLabel"
+        android:layout_alignBottom="@+id/carbsLabel"
+        android:layout_alignParentEnd="true"
+        android:gravity="end"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:text="Fiber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fiberField"
+        android:layout_alignBaseline="@+id/fiberLabel"
+        android:layout_alignBottom="@+id/fiberLabel"
+        android:layout_alignParentEnd="true"
+        android:gravity="end"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:text="Protein"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/proteinField"
+        android:layout_alignBaseline="@+id/proteinLabel"
+        android:layout_alignBottom="@+id/proteinLabel"
+        android:layout_alignParentEnd="true"
+        android:gravity="end"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:text="Vitamin A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/vitAField"
+        android:layout_alignBaseline="@+id/vitALabel"
+        android:layout_alignBottom="@+id/vitALabel"
+        android:layout_alignParentEnd="true"
+        android:gravity="end"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:text="Vitamin C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/vitCField"
+        android:layout_alignBaseline="@+id/vitCLabel"
+        android:layout_alignBottom="@+id/vitCLabel"
+        android:layout_alignParentEnd="true"
+        android:gravity="end"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:text="Calcium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/calciumField"
+        android:layout_alignBaseline="@+id/calciumLabel"
+        android:layout_alignBottom="@+id/calciumLabel"
+        android:layout_alignParentEnd="true"
+        android:gravity="end"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:text="Iron"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ironField"
+        android:layout_alignBaseline="@+id/ironLabel"
+        android:layout_alignBottom="@+id/ironLabel"
+        android:layout_alignParentEnd="true"
+        android:gravity="end"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:text="@string/close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/close"
+        android:background="@color/colorAccent" />
+</RelativeLayout>

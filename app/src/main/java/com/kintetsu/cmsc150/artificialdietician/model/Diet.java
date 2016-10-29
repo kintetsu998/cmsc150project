@@ -1,4 +1,4 @@
-package com.kintetsu.cmsc150.artificialdietician;
+package com.kintetsu.cmsc150.artificialdietician.model;
 
 import java.util.HashMap;
 
