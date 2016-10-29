@@ -15,27 +15,27 @@ public class Database extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "artificial_dietician.db";
     public static final int VERSION = 1;
 
-    private static final String FOOD_TABLE              = "food";
-    private static final String FOOD_NAME               = "food_name";
-    private static final String FOOD_PRICE              = "price";
-    private static final String FOOD_SERVE_SIZE         = "serving_size";
-    private static final String FOOD_CALORIES           = "calories";
-    private static final String FOOD_CHOLESTEROL        = "cholesterol";
-    private static final String FOOD_FAT                = "fat";
-    private static final String FOOD_SODIUM             = "sodium";
-    private static final String FOOD_CARBS              = "carbohydrates";
-    private static final String FOOD_FIBER              = "fiber";
-    private static final String FOOD_PROTEIN            = "protein";
-    private static final String FOOD_VIT_A              = "vit_A";
-    private static final String FOOD_VIT_C              = "vit_C";
-    private static final String FOOD_CALCIUM            = "calcium";
-    private static final String FOOD_IRON               = "iron";
+    public static final String FOOD_TABLE              = "food";
+    public static final String FOOD_NAME               = "food_name";
+    public static final String FOOD_PRICE              = "price";
+    public static final String FOOD_SERVE_SIZE         = "serving_size";
+    public static final String FOOD_CALORIES           = "calories";
+    public static final String FOOD_CHOLESTEROL        = "cholesterol";
+    public static final String FOOD_FAT                = "fat";
+    public static final String FOOD_SODIUM             = "sodium";
+    public static final String FOOD_CARBS              = "carbohydrates";
+    public static final String FOOD_FIBER              = "fiber";
+    public static final String FOOD_PROTEIN            = "protein";
+    public static final String FOOD_VIT_A              = "vit_A";
+    public static final String FOOD_VIT_C              = "vit_C";
+    public static final String FOOD_CALCIUM            = "calcium";
+    public static final String FOOD_IRON               = "iron";
 
-    private static final String DIET_TABLE              = "diet";
-    private static final String DIET_NAME               = "diet_name";
+    public static final String DIET_TABLE              = "diet";
+    public static final String DIET_NAME               = "diet_name";
 
-    private static final String DIET_FOOD_TABLE         = "diet_food";
-    private static final String DIET_FOOD_SERVE_AMT     = "serve_amt";
+    public static final String DIET_FOOD_TABLE         = "diet_food";
+    public static final String DIET_FOOD_SERVE_AMT     = "serve_amt";
 
     private static Database instance;
 
@@ -218,8 +218,14 @@ public class Database extends SQLiteOpenHelper {
     }
 
     public Food getFood(String name) {
-        //TODO Get a food given food name
-        return null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + FOOD_TABLE + " WHERE " + FOOD_NAME + " = ?";
+        String[] field = new String[]{name};
+        Cursor res = db.rawQuery(query, field);
+        Food f = new Food(res);
+
+        res.close();
+        return f;
     }
 
     public ArrayList<String> getFoods() {
