@@ -83,7 +83,7 @@ public class Food {
         }
     }
 
-    public float[] getNutritionalValue(){
+    public float[] getNutrionValue(){
         return new float[]{
                 this.calories, this.cholesterol, this.fat, this.sodium, this.carbs, this.fiber,
                 this.protein, this.vitA, this.vitC, this.calcium, this.iron
