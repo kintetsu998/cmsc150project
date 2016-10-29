@@ -6,7 +6,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
 
 import com.kintetsu.cmsc150.artificialdietician.model.FoodAdapter;
 import com.kintetsu.cmsc150.artificialdietician.util.Database;
