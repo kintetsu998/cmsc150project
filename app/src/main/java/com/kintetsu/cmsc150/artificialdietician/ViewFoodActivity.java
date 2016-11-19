@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.kintetsu.cmsc150.artificialdietician.model.FoodAdapter;
 import com.kintetsu.cmsc150.artificialdietician.util.Database;
@@ -31,6 +32,12 @@ public class ViewFoodActivity extends AppCompatActivity {
             @Override
             public void onItemCheck(String item) {
                 addedFood.add(item);
+
+                Toast.makeText(
+                        ViewFoodActivity.this,
+                        addedFood.toString(),
+                        Toast.LENGTH_SHORT
+                ).show();
             }
 
             @Override
@@ -41,6 +48,12 @@ public class ViewFoodActivity extends AppCompatActivity {
                         break;
                     }
                 }
+
+                Toast.makeText(
+                        ViewFoodActivity.this,
+                        addedFood.toString(),
+                        Toast.LENGTH_SHORT
+                ).show();
             }
         });
 
