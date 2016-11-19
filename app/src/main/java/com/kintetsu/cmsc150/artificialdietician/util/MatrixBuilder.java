@@ -14,6 +14,8 @@ public class MatrixBuilder {
         final int rows = 24 + 3*foodlist.size();
         int[][] tableu = new int[rows][cols];
 
+        //TODO: build the tableu
+
         return tableu;
     }
 }
