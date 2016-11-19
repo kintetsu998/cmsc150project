@@ -6,6 +6,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.kintetsu.cmsc150.artificialdietician.model.FoodAdapter;
@@ -14,6 +16,7 @@ import com.kintetsu.cmsc150.artificialdietician.util.Database;
 import java.util.ArrayList;
 
 public class ViewFoodActivity extends AppCompatActivity {
+    private ArrayList<String> addedFood = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,21 +26,29 @@ public class ViewFoodActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final ArrayList<String> addedFood = new ArrayList<>();
+
         final Database db = Database.getInstance(ViewFoodActivity.this);
         final ArrayList<String> foods = db.getFoods();
+
+        final Button selectAll = (Button) findViewById(R.id.select_all);
+        final Button optimize = (Button) findViewById(R.id.optimize);
+
         final RecyclerView foodRecyclerView = (RecyclerView) findViewById(R.id.foodRecyclerView);
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         final FoodAdapter foodAdapter = new FoodAdapter(foods, this, new FoodAdapter.OnItemClickListener() {
             @Override
             public void onItemCheck(String item) {
-                addedFood.add(item);
+                boolean isFound = false;
 
-                Toast.makeText(
-                        ViewFoodActivity.this,
-                        addedFood.toString(),
-                        Toast.LENGTH_SHORT
-                ).show();
+                for (String str : addedFood) {
+                    if(str.equals(item)) {
+                        isFound = true;
+                    }
+                }
+
+                if(!isFound) {
+                    addedFood.add(item);
+                }
             }
 
             @Override
@@ -48,10 +59,29 @@ public class ViewFoodActivity extends AppCompatActivity {
                         break;
                     }
                 }
+            }
+        });
 
+        selectAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addedFood = foods;
                 Toast.makeText(
                         ViewFoodActivity.this,
-                        addedFood.toString(),
+                        "Selected all of the foods!",
+                        Toast.LENGTH_SHORT
+                ).show();
+
+                foodAdapter.checkAll();
+            }
+        });
+
+        optimize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(
+                        ViewFoodActivity.this,
+                        "Optimize!",
                         Toast.LENGTH_SHORT
                 ).show();
             }
@@ -60,6 +90,10 @@ public class ViewFoodActivity extends AppCompatActivity {
         foodRecyclerView.setLayoutManager(layoutManager);
         foodRecyclerView.setItemAnimator(new DefaultItemAnimator());
         foodRecyclerView.setAdapter(foodAdapter);
+    }
+
+    public ArrayList<String> getAddedFood() {
+        return this.addedFood;
     }
 
 }

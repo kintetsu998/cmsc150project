@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.kintetsu.cmsc150.artificialdietician.InspectFoodActivity;
 import com.kintetsu.cmsc150.artificialdietician.R;
+import com.kintetsu.cmsc150.artificialdietician.ViewFoodActivity;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     private ArrayList<String> foodList;
+    private ArrayList<CheckBox> boxes;
     private OnItemClickListener onItemClickListener;
     private Context context;
 
@@ -28,6 +30,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         this.foodList = foodList;
         this.context = context;
         this.onItemClickListener = listener;
+        boxes = new ArrayList<>();
     }
 
     @Override
@@ -43,6 +46,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         final String food = foodList.get(position);
 
         holder.foodName.setText(food);
+        holder.checkBox.setOnCheckedChangeListener(null);
+        holder.checkBox.setChecked(checkOnList(food));
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -61,6 +66,33 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
                 context.startActivity(i);
             }
         });
+
+        addToBoxes(holder.checkBox);
+    }
+
+    private void addToBoxes(CheckBox checkbox) {
+        boolean exists = false;
+
+        for(CheckBox cb : boxes) {
+            if(cb == checkbox) {
+                exists = true;
+                break;
+            }
+        }
+
+        if(!exists) {
+            boxes.add(checkbox);
+        }
+    }
+
+    private boolean checkOnList(String food) {
+        for(String str : ((ViewFoodActivity) context).getAddedFood()) {
+            if(food.equals(str)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
@@ -74,15 +106,25 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView foodName;
-        public TextView details;
-        public CheckBox checkBox;
+        private TextView foodName;
+        private TextView details;
+        private CheckBox checkBox;
 
-        public ViewHolder(View itemView) {
+        private ViewHolder(View itemView) {
             super(itemView);
             this.foodName = (TextView) itemView.findViewById(R.id.foodName);
             this.checkBox = (CheckBox) itemView.findViewById(R.id.foodCheckBox);
             this.details = (TextView) itemView.findViewById(R.id.details);
         }
+    }
+
+    public void checkAll() {
+        for(CheckBox cb : boxes) {
+            cb.setChecked(true);
+        }
+    }
+
+    public ArrayList<String> getFoodList() {
+        return this.foodList;
     }
 }
