@@ -22,4 +22,6 @@
     <string name="calcium_mg">Calcium (mg):</string>
     <string name="iron_mg">Iron (mg):</string>
     <string name="close">Close</string>
+    <string name="select_all">Select All</string>
+    <string name="optimize">Optimize</string>
 </resources>

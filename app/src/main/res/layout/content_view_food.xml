@@ -1,51 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_view_food"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.kintetsu.cmsc150.artificialdietician.ViewFoodActivity"
     tools:showIn="@layout/activity_view_food">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true">
+        android:id="@+id/foodRecyclerView"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:id="@+id/foodRecyclerView"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="@string/select_all"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="20"/>
+            android:layout_weight="1"
+            android:id="@+id/select_all"
+            android:background="@color/colorAccent2"
+            android:layout_margin="10dp"
+            style="?android:attr/buttonBarStyle"/>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+        <Button
+            android:text="@string/optimize"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <Button
-                android:text="Select All"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/select_all"
-                android:background="@color/colorAccent2"
-                android:layout_margin="10dp" />
-
-            <Button
-                android:text="Optimize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/next"
-                android:layout_weight="1"
-                android:background="@color/colorAccent"
-                android:layout_margin="10dp" />
-        </LinearLayout>
+            android:id="@+id/next"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:layout_margin="10dp"
+            style="?android:attr/buttonBarStyle"/>
     </LinearLayout>
-
-
-</RelativeLayout>
+</LinearLayout>
