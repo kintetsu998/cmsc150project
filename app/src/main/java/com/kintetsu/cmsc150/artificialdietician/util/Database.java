@@ -231,6 +231,21 @@ public class Database extends SQLiteOpenHelper {
         return f;
     }
 
+    public ArrayList<Food> getFood(ArrayList<String> names) {
+        ArrayList<Food> foods = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        for(String name : names) {
+            String query = "SELECT * FROM " + FOOD_TABLE + " WHERE " + FOOD_NAME + " = ?";
+            String[] field = new String[]{name};
+            Cursor res = db.rawQuery(query, field);
+            foods.add(new Food(res));
+            res.close();
+        }
+
+        return foods;
+    }
+
     public ArrayList<String> getFoods() {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT " + FOOD_NAME + " FROM " + FOOD_TABLE + " ORDER BY " + FOOD_NAME;

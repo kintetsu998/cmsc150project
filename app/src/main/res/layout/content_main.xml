@@ -13,24 +13,35 @@
     tools:context="com.kintetsu.cmsc150.artificialdietician.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <Button
-        android:text="@string/view_previous_diet"
+    <TextView
+        android:text="@string/app_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/create_diet"
-        android:layout_alignStart="@+id/create_diet"
-        android:layout_marginTop="28dp"
-        android:id="@+id/view_diet"
-        android:layout_alignEnd="@+id/create_diet"
-        android:background="@color/colorAccent" />
+        android:layout_marginBottom="45dp"
+        android:id="@+id/textView"
+        android:gravity="center_vertical|center_horizontal"
+        android:textStyle="normal|bold"
+        android:textSize="40sp"
+        android:textColor="@android:color/black"
+        android:layout_above="@+id/create_diet"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:text="@string/create_new_diet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/create_diet"
-        android:layout_marginTop="138dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="@color/colorAccent2" />
+        android:background="@color/colorAccent2"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="@string/view_previous_diet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/view_diet"
+        android:background="@color/colorAccent"
+        android:layout_below="@+id/create_diet"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp" />
 </RelativeLayout>

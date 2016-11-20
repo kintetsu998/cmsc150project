@@ -65,6 +65,7 @@ public class ViewFoodActivity extends AppCompatActivity {
         selectAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO: uncheck all if all are checked
                 addedFood = foods;
                 Toast.makeText(
                         ViewFoodActivity.this,
