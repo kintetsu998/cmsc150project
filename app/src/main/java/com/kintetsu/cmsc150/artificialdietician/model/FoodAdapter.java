@@ -124,6 +124,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         }
     }
 
+    public void unCheckAll() {
+        for(CheckBox cb : boxes) {
+            cb.setChecked(false);
+        }
+    }
+
     public ArrayList<String> getFoodList() {
         return this.foodList;
     }

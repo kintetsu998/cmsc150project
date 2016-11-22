@@ -16,8 +16,7 @@ public class FileUtil {
     public static final String FILE_NAME = "AD_output.txt";
     public static final String TAG = FileUtil.class.getSimpleName();
 
-    public static boolean write(String text, Context c) {
-        File root;
+    public static boolean write(String text, Context context) {
         File dir;
         File file;
 
@@ -25,15 +24,14 @@ public class FileUtil {
             return false;
         }
 
-        root = android.os.Environment.getExternalStorageDirectory();
-        dir = new File(root.getAbsolutePath() + "/simplex");
-        dir.mkdirs();
+        dir = android.os.Environment.getExternalStoragePublicDirectory("Download");
         file = new File(dir, "tableu.txt");
 
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file, false));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
             writer.write(text + "\n");
             writer.close();
+
             return true;
         } catch(Exception e) {
             Log.e(TAG, "Error", e);
@@ -43,7 +41,6 @@ public class FileUtil {
 
     //code from http://stackoverflow.com/questions/8330276/write-a-file-in-external-storage-in-android
     public static boolean writeTableu(double[][] tableu, Context context, String header, Boolean isClear) {
-        File root;
         File dir;
         File file;
 
@@ -51,9 +48,7 @@ public class FileUtil {
             return false;
         }
 
-        root = android.os.Environment.getExternalStorageDirectory();
-        dir = new File(root.getAbsolutePath() + "/simplex");
-        dir.mkdirs();
+        dir = android.os.Environment.getExternalStoragePublicDirectory("Download");
         file = new File(dir, "tableu.txt");
 
         try {
@@ -62,13 +57,12 @@ public class FileUtil {
             writer.write(header + "\n");
             for(int i=0; i<tableu.length; i++) {
                 for(int j=0; j<tableu[i].length; j++) {
-                    writer.write(tableu[i][j] + " ");
+                    writer.write(String.format("%.2d ", tableu[i][j]));
                 }
-                writer.write("\n");
+                writer.write(" //\n");
             }
             writer.write("\n");
             writer.close();
-
             return true;
         } catch(Exception e) {
             Log.e(TAG, "Error", e);
@@ -76,8 +70,7 @@ public class FileUtil {
         }
     }
 
-    public static boolean writeBasicAns(double[] ans, Context c) {
-        File root;
+    public static boolean writeBasicAns(double[] ans, Context context) {
         File dir;
         File file;
 
@@ -85,9 +78,7 @@ public class FileUtil {
             return false;
         }
 
-        root = android.os.Environment.getExternalStorageDirectory();
-        dir = new File(root.getAbsolutePath() + "/simplex");
-        dir.mkdirs();
+        dir = android.os.Environment.getExternalStoragePublicDirectory("Download");
         file = new File(dir, "tableu.txt");
 
         try {
@@ -95,7 +86,7 @@ public class FileUtil {
 
             writer.write("Basic Solution:\n");
             for(int i=0; i<ans.length; i++) {
-                writer.write(ans[i] + " ");
+                writer.write(String.format("%.2d ", ans[i]));
             }
             writer.write("\n\n");
             writer.close();

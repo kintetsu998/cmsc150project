@@ -10,8 +10,8 @@ public class Simplex {
     private Context c;
 
 	private Simplex(double[][] matrix, Context c) {
-		ans = new double[matrix[0].length];
-        c = c;
+		this.ans = new double[matrix[0].length];
+        this.c = c;
 		calculate(matrix);
 	}
 

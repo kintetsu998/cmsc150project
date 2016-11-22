@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 public class ViewFoodActivity extends AppCompatActivity {
     private ArrayList<String> addedFood = new ArrayList<>();
+    private boolean checkedAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,33 +62,62 @@ public class ViewFoodActivity extends AppCompatActivity {
                         break;
                     }
                 }
+
+                checkedAll = false;
+                selectAll.setText(R.string.select_all);
             }
         });
+
+        checkedAll = false;
 
         selectAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: uncheck all if all are checked
-                addedFood = foods;
-                Toast.makeText(
-                        ViewFoodActivity.this,
-                        "Selected all of the foods!",
-                        Toast.LENGTH_SHORT
-                ).show();
+                if(!checkedAll) {
+                    addToAddedFood();
+                    foodAdapter.checkAll();
+                    checkedAll = true;
+                    selectAll.setText(R.string.unselect_all);
+                } else {
+                    addedFood.clear();
+                    foodAdapter.unCheckAll();
+                    checkedAll = false;
+                    selectAll.setText(R.string.select_all);
+                }
+            }
 
-                foodAdapter.checkAll();
+            private void addToAddedFood() {
+                boolean exists = false;
+
+                for(String str1 : foods) {
+                    for(String str2 : addedFood) {
+                        if(str1.equals(str2)) {
+                            exists = true;
+                            break;
+                        }
+                    }
+
+                    if(!exists) {
+                        addedFood.add(str1);
+                    }
+                }
             }
         });
 
         optimize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                double[][] tableu = MatrixBuilder.buildTableu(db.getFood(addedFood), ViewFoodActivity.this);
-                double[] ans = Simplex.solve(tableu, ViewFoodActivity.this);
-                if(ans != null) {
-                    Toast.makeText(ViewFoodActivity.this, "Optimizing done!", Toast.LENGTH_SHORT).show();
+                if(addedFood.size() > 0) {
+                    double[][] tableu = MatrixBuilder.buildTableu(db.getFood(addedFood), ViewFoodActivity.this);
+                    double[] ans = Simplex.solve(tableu, ViewFoodActivity.this);
+
+                    if (ans != null) {
+                        Toast.makeText(ViewFoodActivity.this, "Optimizing done!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(ViewFoodActivity.this, "No solution found.", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(ViewFoodActivity.this, "No solution found.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewFoodActivity.this, "No foods selected!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
