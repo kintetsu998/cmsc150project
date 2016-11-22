@@ -27,9 +27,18 @@ public class Food {
     public static final int CALCIUM      = 9;
     public static final int IRON         = 10;
 
+    public static final float[] MAX_NUTRIENTS = {
+            2250, 300, 65, 2400, 300, 100, 100, 50000, 20000, 1600, 30
+    };
+
+    public static final float[] MIN_NUTRIENTS = {
+            2000, 0, 0, 0, 0, 25, 50, 5000, 50, 800, 10
+    };
+
     private String name;
     private String serveSize;
     private float price;
+
     private float calories;
     private float cholesterol;
     private float fat;

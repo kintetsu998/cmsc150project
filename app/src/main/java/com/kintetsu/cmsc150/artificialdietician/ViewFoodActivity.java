@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.kintetsu.cmsc150.artificialdietician.model.FoodAdapter;
 import com.kintetsu.cmsc150.artificialdietician.util.Database;
+import com.kintetsu.cmsc150.artificialdietician.util.MatrixBuilder;
+import com.kintetsu.cmsc150.artificialdietician.util.Simplex;
 
 import java.util.ArrayList;
 
@@ -80,11 +82,13 @@ public class ViewFoodActivity extends AppCompatActivity {
         optimize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(
-                        ViewFoodActivity.this,
-                        "Optimize!",
-                        Toast.LENGTH_SHORT
-                ).show();
+                double[][] tableu = MatrixBuilder.buildTableu(db.getFood(addedFood), ViewFoodActivity.this);
+                double[] ans = Simplex.solve(tableu, ViewFoodActivity.this);
+                if(ans != null) {
+                    Toast.makeText(ViewFoodActivity.this, "Optimizing done!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ViewFoodActivity.this, "No solution found.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kintetsu.cmsc150.artificialdietician.model.Food;
 import com.kintetsu.cmsc150.artificialdietician.util.Database;
@@ -36,8 +35,6 @@ public class InspectFoodActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        Toast.makeText(this, foodName, Toast.LENGTH_SHORT).show();
     }
 
     private void showDetails(Food food) {

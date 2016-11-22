@@ -1,21 +1,41 @@
 package com.kintetsu.cmsc150.artificialdietician.util;
 
-public class Simplex {
-	private double[] ans;
+import android.content.Context;
+import android.util.Log;
 
-	private Simplex(double[][] matrix) {
+public class Simplex {
+    public static final String TAG = Simplex.class.getSimpleName();
+
+	private double[] ans;
+    private Context c;
+
+	private Simplex(double[][] matrix, Context c) {
 		ans = new double[matrix[0].length];
+        c = c;
 		calculate(matrix);
 	}
 
 	private void calculate(double[][] tableu) {
 		int pc, pr;
-		while((pc = getPivotCol(tableu)) > -1) {
-			pr = getPivotRow(tableu, pc);
-			normalize(tableu, pc, pr);
-		}
+		int iter = 0;
 
-		getAnswers(tableu);
+        try {
+            while ((pc = getPivotCol(tableu)) > -1) {
+                FileUtil.writeTableu(tableu, c, "Iteration " + iter, false);
+                FileUtil.writeBasicAns(this.ans, c);
+
+                pr = getPivotRow(tableu, pc);
+
+                normalize(tableu, pc, pr);
+                iter++;
+
+                getAnswers(tableu);
+            }
+        } catch(Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+            FileUtil.write("No possible solution.", c);
+            ans = null;
+        }
 	}
 
 	private int getPivotCol(double[][] tableu) {
@@ -36,6 +56,7 @@ public class Simplex {
 		int lastCol = tableu[0].length - 1;
 		int minIndex = -1;
 		double minValue = Double.MAX_VALUE;
+
 		for(int i=0; i<tableu.length; i++) {
 			double testRatio;
 			if(tableu[i][col] == 0) continue;
@@ -92,7 +113,7 @@ public class Simplex {
 		return ans;
 	}
 
-	public static double[] solve(double[][] tableu) {
-		return new Simplex(tableu).getAns();
+	public static double[] solve(double[][] tableu, Context c) {
+		return new Simplex(tableu, c).getAns();
 	}
 }
