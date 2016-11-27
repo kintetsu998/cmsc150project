@@ -108,7 +108,7 @@ public class ViewFoodActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(addedFood.size() > 0) {
-                    double[][] tableu = MatrixBuilder.buildTableu(db.getFood(addedFood), ViewFoodActivity.this);
+                    double[][] tableu = MatrixBuilder.buildTableu(db.getFood(addedFood), ViewFoodActivity.this, true);
                     double[] ans = Simplex.solve(tableu, ViewFoodActivity.this);
 
                     if (ans != null) {

@@ -21,7 +21,7 @@ public class Simplex {
 
         try {
             while ((pc = getPivotCol(tableu)) > -1) {
-                FileUtil.writeTableu(tableu, c, "Iteration " + iter, false);
+                FileUtil.writeTableu(tableu, c, "Iteration " + iter);
                 FileUtil.writeBasicAns(this.ans, c);
 
                 pr = getPivotRow(tableu, pc);
@@ -31,7 +31,7 @@ public class Simplex {
 
                 getAnswers(tableu);
             }
-        } catch(Exception e) {
+        } catch(ArrayIndexOutOfBoundsException e) {
             Log.e(TAG, e.getMessage(), e);
             FileUtil.write("No possible solution.", c);
             ans = null;
