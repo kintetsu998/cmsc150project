@@ -68,6 +68,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kintetsu.cmsc150.artificialdietician.MainActivity" />
         </activity>
+        <activity
+            android:name=".UltimateSolutionActivity"
+            android:label="@string/title_activity_ultimate_solution"
+            android:parentActivityName=".AddConstraintActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kintetsu.cmsc150.artificialdietician.AddConstraintActivity" />
+        </activity>
     </application>
 
 </manifest>

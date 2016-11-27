@@ -110,7 +110,7 @@ public class ViewFoodActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(addedFood.size() > 0) {
                     double[][] tableu = MatrixBuilder.buildTableu(db.getFood(addedFood), ViewFoodActivity.this, true);
-                    double[] ans = Simplex.solve(tableu, ViewFoodActivity.this);
+                    double[] ans = Simplex.solve(tableu, ViewFoodActivity.this, true);
 
                     if (ans != null) {
                         Toast.makeText(ViewFoodActivity.this, "Optimizing done!", Toast.LENGTH_SHORT).show();

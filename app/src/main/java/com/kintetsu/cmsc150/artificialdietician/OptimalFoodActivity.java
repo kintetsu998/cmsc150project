@@ -27,8 +27,6 @@ public class OptimalFoodActivity extends AppCompatActivity {
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(OptimalFoodActivity.this, MainActivity.class);
-                startActivity(i);
                 finish();
             }
         });

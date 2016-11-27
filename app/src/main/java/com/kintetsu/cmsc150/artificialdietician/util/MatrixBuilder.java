@@ -64,6 +64,10 @@ public class MatrixBuilder {
             mat = transposeMatrix(mat);
         }
 
+        for(int i=0; i<mat[0].length; i++) {
+            mat[mat.length-1][i] *= -1;
+        }
+
         return mat;
     }
 
@@ -82,7 +86,7 @@ public class MatrixBuilder {
 
         Log.d(TAG, constraint);
         for(char c : constraint.toCharArray()) {
-            if(c == '+' || c == '-' || c == '<' || (c == '=' && prevC != '<')) {
+            if(c == '+' || c == '-' || c == '<' || c == '>' || (c == '=' && (prevC != '<' || prevC != '>'))) {
                 if(!num.equals("") || !var.equals("")) {
                     for(int i=0; i<vars.length; i++) {
                         if(var.equals(vars[i])) {
@@ -91,7 +95,7 @@ public class MatrixBuilder {
                         }
                     }
                     if(index == -1 && !foundEquals) {
-                        throw new RuntimeException(constraint + " is not a valid constraint.");
+                        throw new RuntimeException(constraint + " is not a valid constraint. Variable is " + var);
                     }
 
                     Double d = (num.equals(""))? 1 : Double.valueOf(num);
@@ -121,11 +125,7 @@ public class MatrixBuilder {
             prevC = c;
         }
 
-        if(!constraint.contains("<")) {
-            for(int i=0; i<coeffs.length; i++) {
-                coeffs[i]  = (coeffs[i] == 0)? coeffs[i] : coeffs[i]*-1;
-            }
-
+        if(!constraint.contains("<") && !constraint.contains(">")) {
             coeffs[coeffs.length-1] = 0.0;
         } else {
             Double d = Double.valueOf(num);
@@ -141,7 +141,7 @@ public class MatrixBuilder {
         return coeffs;
     }
 
-    private static String[] getVariables(String objFunction) {
+    public static String[] getVariables(String objFunction) {
         ArrayList<String> vars = new ArrayList<>();
         String var = "";
         boolean foundChar = false;
@@ -157,7 +157,7 @@ public class MatrixBuilder {
                 if(c == '=') {
                     break;
                 }
-            } else if((Character.isDigit(c) && !foundChar) || c == ' '){
+            } else if(((Character.isDigit(c) || c == '.') && !foundChar) || c == ' '){
                 continue;
             } else {
                 foundChar = true;
@@ -179,37 +179,41 @@ public class MatrixBuilder {
                 //for nutritional content
                 for (int j = 0; j < foodlist.size(); j++) {
                     Food f = foodlist.get(j);
-                    matrix[i][j] = f.getNutrionValue(i / 2);
+                    matrix[i][j] = -1 * f.getNutrionValue(i / 2);
                 }
 
-                matrix[i][cols-1] = Food.MAX_NUTRIENTS[i/2];
+                matrix[i][cols-1] = -1 * Food.MAX_NUTRIENTS[i/2];
                 i++;
 
                 for (int j = 0; j < foodlist.size(); j++) {
                     Food f = foodlist.get(j);
-                    matrix[i][j] = -1 * f.getNutrionValue(i / 2);
+                    matrix[i][j] = f.getNutrionValue(i / 2);
                 }
 
-                matrix[i][cols-1] = -1 * Food.MIN_NUTRIENTS[i/2];
+                matrix[i][cols-1] = Food.MIN_NUTRIENTS[i/2];
                 k = i-22;
             } else if(i < rows-1) {
                 //for serving constraint
-                matrix[i][k] = 1;
-                matrix[i][cols-1] = 10;
-                matrix[i+1][k] = -1;
+                matrix[i][k] = -1;
+                matrix[i][cols-1] = -10;
+                matrix[i+1][k] = 1;
                 matrix[i+1][cols-1] = 0;
                 i++;
                 k++;
             } else {
                 //objective function
                 for(int j=0; j<foodlist.size(); j++) {
-                    matrix[i][j] = -1 * foodlist.get(j).getPrice();
+                    matrix[i][j] = foodlist.get(j).getPrice();
                 }
             }
         }
 
         if(minimization) {
             matrix = transposeMatrix(matrix);
+        }
+
+        for(int i=0; i<matrix[matrix.length-1].length; i++) {
+            matrix[matrix.length-1][i] *= -1;
         }
 
         return matrix;

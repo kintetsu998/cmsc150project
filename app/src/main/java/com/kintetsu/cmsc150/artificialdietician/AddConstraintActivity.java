@@ -1,6 +1,7 @@
 package com.kintetsu.cmsc150.artificialdietician;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,12 @@ public class AddConstraintActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //TODO: Remove this code snippet
+        final ArrayList<String> initialConstraint = new ArrayList<>();
+        initialConstraint.add("60x+60y>=300");
+        initialConstraint.add("12x+6y>=36");
+        initialConstraint.add("10x+30y>=90");
+
         final Button add_obj =              (Button) findViewById(R.id.add_obj);
         final Button add_constraint =       (Button) findViewById(R.id.add_constraint);
         final Button reset =                (Button) findViewById(R.id.reset);
@@ -44,11 +51,12 @@ public class AddConstraintActivity extends AppCompatActivity {
 
         final RecyclerView constraint_rv = (RecyclerView) findViewById(R.id.constraint_rv);
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        final ConstraintAdapter constraintAdapter = new ConstraintAdapter();
+        final ConstraintAdapter constraintAdapter = new ConstraintAdapter(initialConstraint);
 
         constraint_rv.setLayoutManager(layoutManager);
         constraint_rv.setItemAnimator(new DefaultItemAnimator());
         constraint_rv.setAdapter(constraintAdapter);
+        obj_func_field.setText("0.12x+0.15y=w");
 
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +102,12 @@ public class AddConstraintActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             double[][] tableu;
+                            double[] ans;
+                            boolean minimization;
+
+                            String[] vars = MatrixBuilder.getVariables(obj_text.getText().toString());
                             String ansStr = "";
+                            Intent intent = new Intent(AddConstraintActivity.this, UltimateSolutionActivity.class);
                             switch (i) {
                                 case DialogInterface.BUTTON_POSITIVE:
                                     tableu = MatrixBuilder.buildTableu(
@@ -102,7 +115,7 @@ public class AddConstraintActivity extends AppCompatActivity {
                                             AddConstraintActivity.this,
                                             true
                                     );
-
+                                    minimization = true;
                                     break;
                                 default:
                                     tableu = MatrixBuilder.buildTableu(
@@ -110,14 +123,26 @@ public class AddConstraintActivity extends AppCompatActivity {
                                             AddConstraintActivity.this,
                                             false
                                     );
-
+                                    minimization = false;
                                     break;
                             }
 
-                            for(double d : Simplex.solve(tableu, AddConstraintActivity.this)) {
-                                ansStr += Double.toString(d) + " ";
+                            ans = Simplex.solve(tableu, AddConstraintActivity.this, minimization);
+
+                            if(ans != null) {
+                                for (double d : ans) {
+                                    ansStr += Double.toString(d) + " ";
+                                }
+                                Log.d(TAG, ansStr);
+                            } else {
+                                Log.d(TAG, "null is the answer.");
                             }
-                            Log.d(TAG, ansStr);
+
+                            intent.putExtra("ans", ans);
+                            intent.putExtra("vars", vars);
+                            intent.putExtra("minimization", minimization);
+                            startActivity(intent);
+                            finish();
                         }
                     };
 

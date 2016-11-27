@@ -9,13 +9,13 @@ public class Simplex {
 	private double[] ans;
     private Context c;
 
-	private Simplex(double[][] matrix, Context c) {
+	private Simplex(double[][] matrix, Context c, boolean minimization) {
 		this.ans = new double[matrix[0].length-1];
         this.c = c;
-		calculate(matrix);
+		calculate(matrix, minimization);
 	}
 
-	private void calculate(double[][] tableu) {
+	private void calculate(double[][] tableu, boolean minimization) {
 		int pc, pr;
 		int iter = 0;
 
@@ -29,7 +29,7 @@ public class Simplex {
                 normalize(tableu, pc, pr);
                 iter++;
 
-                getAnswers(tableu);
+                getAnswers(tableu, minimization);
             }
 
 			FileUtil.writeTableu(tableu, c, "Iteration " + iter);
@@ -91,39 +91,45 @@ public class Simplex {
 		}
 	}
 
-	private void getAnswers(double[][] tableu) {
+	private void getAnswers(double[][] tableu, boolean minimization) {
 		int lastCol = tableu[0].length - 1;
 
-		for(int i=0; i<tableu[0].length; i++) {
-			boolean hasFoundOne = false, onlyOne = true;
-			int oneRow = -1;
-
-			for(int j=0; j<tableu.length; j++) {
-				if(tableu[j][i] != 0) {
-					if(tableu[j][i] == 1 && !hasFoundOne) {
-						hasFoundOne = true;
-						oneRow = j;
-					} else {
-						onlyOne = false;
-					}
-				}
-			}
-
-			if(hasFoundOne && onlyOne) {
-				ans[i] = tableu[oneRow][lastCol];
-                Log.d(TAG, "Putting " + Double.toString(tableu[oneRow][lastCol]) + " on index " + Integer.toString(i));
-			} else {
-                ans[i] = 0;
-                Log.d(TAG, "No solution on index " + Integer.toString(i));
+        if(minimization) {
+            for(int i=0; i<tableu[0].length-1; i++) {
+                ans[i] = tableu[tableu.length-1][i];
             }
-		}
+        } else {
+            for (int i = 0; i < tableu[0].length - 1; i++) {
+                boolean hasFoundOne = false, onlyOne = true;
+                int oneRow = -1;
+
+                for (int j = 0; j < tableu.length; j++) {
+                    if (tableu[j][i] != 0) {
+                        if (tableu[j][i] == 1 && !hasFoundOne) {
+                            hasFoundOne = true;
+                            oneRow = j;
+                        } else {
+                            onlyOne = false;
+                        }
+                    }
+                }
+
+                if (hasFoundOne && onlyOne) {
+                    ans[i] = tableu[oneRow][lastCol];
+                    Log.d(TAG, "Putting " + Double.toString(tableu[oneRow][lastCol]) + " on index " + Integer.toString(i));
+                } else {
+                    ans[i] = 0;
+                    Log.d(TAG, "No solution on index " + Integer.toString(i));
+                }
+            }
+        }
 	}
 
 	private double[] getAns() {
 		return ans;
 	}
 
-	public static double[] solve(double[][] tableu, Context c) {
-		return new Simplex(tableu, c).getAns();
+	public static double[] solve(double[][] tableu, Context c, boolean minimization) {
+		return new Simplex(tableu, c, minimization).getAns();
 	}
 }
