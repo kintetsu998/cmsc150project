@@ -1,7 +1,7 @@
 package com.kintetsu.cmsc150.artificialdietician.util;
 
 import android.content.Context;
-import android.widget.Toast;
+import android.util.Log;
 
 import com.kintetsu.cmsc150.artificialdietician.model.Food;
 
@@ -16,7 +16,6 @@ public class MatrixBuilder {
     private static Context c;
 
     public static double[][] buildTableu(String[] constraints, Context c, boolean minimization) {
-        //TODO: Create tableu
         MatrixBuilder.c = c;
         double[][] matrix = buildMatrix(constraints, minimization);
 
@@ -47,13 +46,91 @@ public class MatrixBuilder {
         return tableu;
     }
 
-    private static double[][] buildMatrix(String[] constraint, boolean minimization) {
-        String[] variables = getVariables(constraint[constraint.length-1]);
+    private static double[][] buildMatrix(String[] constraints, boolean minimization) {
+        String[] variables = getVariables(constraints[constraints.length-1]);
+        ArrayList<double[]> coeffs = new ArrayList<>();
+        String vars = "";
 
         for(String var : variables) {
-            Toast.makeText(c, var, Toast.LENGTH_SHORT).show();
+            vars += var + " ";
         }
-        return null;
+
+        Log.d(TAG, vars);
+
+        for(String constraint : constraints) {
+            double[] coeff = getCoeff(constraint, variables);
+            coeffs.add(coeff);
+        }
+
+        return coeffs.toArray(new double[1][1]);
+    }
+
+    private static double[] getCoeff(String constraint, String[] vars) {
+        double[] coeffs = new double[vars.length+1];
+        String num = "";
+        String var = "";
+        String coeffStr = "";
+
+        boolean isPositive = true;
+        boolean foundChar = false;
+        boolean foundEquals = false;
+
+        int index = -1;
+        char prevC = '\n';
+
+        Log.d(TAG, constraint);
+        for(char c : constraint.toCharArray()) {
+            if(c == '+' || c == '-' || c == '<' || (c == '=' && prevC != '<')) {
+                if(!num.equals("")) {
+                    for(int i=0; i<vars.length; i++) {
+                        if(var.equals(vars[i])) {
+                            index = i;
+                            break;
+                        }
+                    }
+                    if(index == -1 && !foundEquals) {
+                        throw new RuntimeException(constraint + " is not a valid constraint.");
+                    }
+
+                    Double d = Double.valueOf(num);
+                    if(!isPositive) d*=-1;
+                    coeffs[index] = d;
+                }
+
+                if(c == '-') {
+                    isPositive = false;
+                } else {
+                    isPositive = true;
+                }
+
+                index = -1;
+                foundChar = false;
+                num = "";
+                var = "";
+            } else if(Character.isDigit(c) && !foundChar) {
+                num += c;
+            } else if(c == ' ' || c == '=') {
+                continue;
+            } else {
+                foundChar = true;
+                var += c;
+            }
+
+            prevC = c;
+        }
+
+        if(!constraint.contains("<")) {
+            for(int i=0; i<coeffs.length; i++) {
+                coeffs[i]  = (coeffs[i] == 0)? coeffs[i] : coeffs[i]*-1;
+            }
+        }
+
+        for(double co : coeffs) {
+            coeffStr += Double.toString(co) + " ";
+        }
+
+        Log.d(TAG, coeffStr);
+        return coeffs;
     }
 
     private static String[] getVariables(String objFunction) {

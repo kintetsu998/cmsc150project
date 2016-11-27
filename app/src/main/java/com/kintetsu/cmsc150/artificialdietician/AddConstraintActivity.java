@@ -43,6 +43,9 @@ public class AddConstraintActivity extends AppCompatActivity {
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         final ConstraintAdapter constraintAdapter = new ConstraintAdapter();
 
+        obj_func_field.setText("5x+3y-1z=Z");
+        constraint_field.setText("1x+1y<=10");
+
         constraint_rv.setLayoutManager(layoutManager);
         constraint_rv.setItemAnimator(new DefaultItemAnimator());
         constraint_rv.setAdapter(constraintAdapter);
