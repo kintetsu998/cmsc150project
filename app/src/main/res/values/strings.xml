@@ -27,4 +27,10 @@
     <string name="optimize">Optimize</string>
     <string name="title_activity_optimal_food">Optimal Amount</string>
     <string name="go_back">Go Back to Main Menu</string>
+    <string name="title_activity_add_constraint">Setup Constraints</string>
+    <string name="obj_hint">Enter Objective Function</string>
+    <string name="constraint_hint">Enter Constraint</string>
+    <string name="obj_button">Set Objective Function</string>
+    <string name="constraint_button">Add Constraint</string>
+    <string name="obj_function_temp">No objective function yet</string>
 </resources>

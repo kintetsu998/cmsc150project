@@ -6,9 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
-import static com.kintetsu.cmsc150.artificialdietician.R.id.view_diet;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
         ultim_opt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "View Diet", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(MainActivity.this, AddConstraintActivity.class);
+                startActivity(i);
             }
         });
 

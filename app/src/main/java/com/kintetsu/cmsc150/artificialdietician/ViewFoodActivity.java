@@ -117,6 +117,7 @@ public class ViewFoodActivity extends AppCompatActivity {
                         Intent i = new Intent(ViewFoodActivity.this, OptimalFoodActivity.class);
                         i.putExtra("ans", ans);
                         startActivity(i);
+                        finish();
                     } else {
                         Toast.makeText(ViewFoodActivity.this, "No solution found.", Toast.LENGTH_SHORT).show();
                     }

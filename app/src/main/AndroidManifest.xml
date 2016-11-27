@@ -58,6 +58,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kintetsu.cmsc150.artificialdietician.ViewFoodActivity" />
         </activity>
+        <activity
+            android:name=".AddConstraintActivity"
+            android:label="@string/title_activity_add_constraint"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kintetsu.cmsc150.artificialdietician.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
