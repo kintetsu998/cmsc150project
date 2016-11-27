@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,10 +17,12 @@ import android.widget.Toast;
 
 import com.kintetsu.cmsc150.artificialdietician.model.ConstraintAdapter;
 import com.kintetsu.cmsc150.artificialdietician.util.MatrixBuilder;
+import com.kintetsu.cmsc150.artificialdietician.util.Simplex;
 
 import java.util.ArrayList;
 
 public class AddConstraintActivity extends AppCompatActivity {
+    public static final String TAG = AddConstraintActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +45,6 @@ public class AddConstraintActivity extends AppCompatActivity {
         final RecyclerView constraint_rv = (RecyclerView) findViewById(R.id.constraint_rv);
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         final ConstraintAdapter constraintAdapter = new ConstraintAdapter();
-
-        obj_func_field.setText("5x+3y-1z=Z");
-        constraint_field.setText("1x+1y<=10");
 
         constraint_rv.setLayoutManager(layoutManager);
         constraint_rv.setItemAnimator(new DefaultItemAnimator());
@@ -94,6 +94,7 @@ public class AddConstraintActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             double[][] tableu;
+                            String ansStr = "";
                             switch (i) {
                                 case DialogInterface.BUTTON_POSITIVE:
                                     tableu = MatrixBuilder.buildTableu(
@@ -112,6 +113,11 @@ public class AddConstraintActivity extends AppCompatActivity {
 
                                     break;
                             }
+
+                            for(double d : Simplex.solve(tableu, AddConstraintActivity.this)) {
+                                ansStr += Double.toString(d) + " ";
+                            }
+                            Log.d(TAG, ansStr);
                         }
                     };
 

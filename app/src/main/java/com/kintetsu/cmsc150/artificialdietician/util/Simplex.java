@@ -10,7 +10,7 @@ public class Simplex {
     private Context c;
 
 	private Simplex(double[][] matrix, Context c) {
-		this.ans = new double[matrix[0].length];
+		this.ans = new double[matrix[0].length-1];
         this.c = c;
 		calculate(matrix);
 	}
@@ -31,6 +31,10 @@ public class Simplex {
 
                 getAnswers(tableu);
             }
+
+			FileUtil.writeTableu(tableu, c, "Iteration " + iter);
+			FileUtil.writeBasicAns(this.ans, c);
+            FileUtil.write("Solution found.", c);
         } catch(ArrayIndexOutOfBoundsException e) {
             Log.e(TAG, e.getMessage(), e);
             FileUtil.write("No possible solution.", c);
@@ -89,9 +93,11 @@ public class Simplex {
 
 	private void getAnswers(double[][] tableu) {
 		int lastCol = tableu[0].length - 1;
+
 		for(int i=0; i<tableu[0].length; i++) {
 			boolean hasFoundOne = false, onlyOne = true;
 			int oneRow = -1;
+
 			for(int j=0; j<tableu.length; j++) {
 				if(tableu[j][i] != 0) {
 					if(tableu[j][i] == 1 && !hasFoundOne) {
@@ -105,7 +111,11 @@ public class Simplex {
 
 			if(hasFoundOne && onlyOne) {
 				ans[i] = tableu[oneRow][lastCol];
-			}
+                Log.d(TAG, "Putting " + Double.toString(tableu[oneRow][lastCol]) + " on index " + Integer.toString(i));
+			} else {
+                ans[i] = 0;
+                Log.d(TAG, "No solution on index " + Integer.toString(i));
+            }
 		}
 	}
 

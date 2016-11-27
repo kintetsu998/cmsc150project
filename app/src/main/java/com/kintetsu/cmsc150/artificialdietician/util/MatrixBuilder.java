@@ -83,7 +83,7 @@ public class MatrixBuilder {
         Log.d(TAG, constraint);
         for(char c : constraint.toCharArray()) {
             if(c == '+' || c == '-' || c == '<' || (c == '=' && prevC != '<')) {
-                if(!num.equals("")) {
+                if(!num.equals("") || !var.equals("")) {
                     for(int i=0; i<vars.length; i++) {
                         if(var.equals(vars[i])) {
                             index = i;
@@ -94,7 +94,7 @@ public class MatrixBuilder {
                         throw new RuntimeException(constraint + " is not a valid constraint.");
                     }
 
-                    Double d = Double.valueOf(num);
+                    Double d = (num.equals(""))? 1 : Double.valueOf(num);
                     if(!isPositive) d*=-1;
                     coeffs[index] = d;
                 }
@@ -125,6 +125,8 @@ public class MatrixBuilder {
             for(int i=0; i<coeffs.length; i++) {
                 coeffs[i]  = (coeffs[i] == 0)? coeffs[i] : coeffs[i]*-1;
             }
+
+            coeffs[coeffs.length-1] = 0.0;
         } else {
             Double d = Double.valueOf(num);
             if(!isPositive) d*=-1;
