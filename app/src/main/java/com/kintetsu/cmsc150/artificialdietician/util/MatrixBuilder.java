@@ -1,6 +1,7 @@
 package com.kintetsu.cmsc150.artificialdietician.util;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.kintetsu.cmsc150.artificialdietician.model.Food;
 
@@ -12,9 +13,22 @@ import java.util.ArrayList;
 
 public class MatrixBuilder {
     public static final String TAG = MatrixBuilder.class.getSimpleName();
+    private static Context c;
+
+    public static double[][] buildTableu(String[] constraints, Context c, boolean minimization) {
+        //TODO: Create tableu
+        MatrixBuilder.c = c;
+        double[][] matrix = buildMatrix(constraints, minimization);
+
+        return null;
+    }
 
     public static double[][] buildTableu(ArrayList<Food> foodlist, Context c, boolean minimization) {
-        double[][] matrix = buildMatrix(foodlist, minimization, c);
+        double[][] matrix = buildMatrix(foodlist, minimization);
+        return createTableu(matrix, c);
+    }
+
+    public static double[][] createTableu(double[][] matrix, Context c) {
         double[][] tableu = new double[matrix.length][matrix[0].length + matrix.length];
 
         for(int i = 0; i < matrix.length; i++) {
@@ -33,7 +47,43 @@ public class MatrixBuilder {
         return tableu;
     }
 
-    private static double[][] buildMatrix(ArrayList<Food> foodlist, boolean minimization, Context c) {
+    private static double[][] buildMatrix(String[] constraint, boolean minimization) {
+        String[] variables = getVariables(constraint[constraint.length-1]);
+
+        for(String var : variables) {
+            Toast.makeText(c, var, Toast.LENGTH_SHORT).show();
+        }
+        return null;
+    }
+
+    private static String[] getVariables(String objFunction) {
+        ArrayList<String> vars = new ArrayList<>();
+        String var = "";
+        boolean foundChar = false;
+
+        for(char c : objFunction.toCharArray()) {
+            if(c == '+' || c == '-' || c == '=') {
+                if(!var.equals("")) {
+                    vars.add(var);
+                }
+
+                var = "";
+                foundChar = false;
+                if(c == '=') {
+                    break;
+                }
+            } else if((Character.isDigit(c) && !foundChar) || c == ' '){
+                continue;
+            } else {
+                foundChar = true;
+                var += c;
+            }
+        }
+
+        return vars.toArray(new String[1]);
+    }
+
+    private static double[][] buildMatrix(ArrayList<Food> foodlist, boolean minimization) {
         final int rows = 23 + 2*foodlist.size();
         final int cols = 1 + foodlist.size();
         double[][] matrix = new double[rows][cols];

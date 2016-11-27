@@ -33,4 +33,5 @@
     <string name="obj_button">Set Objective Function</string>
     <string name="constraint_button">Add Constraint</string>
     <string name="obj_function_temp">No objective function yet</string>
+    <string name="reset">Reset</string>
 </resources>
