@@ -1,5 +1,6 @@
 package com.kintetsu.cmsc150.artificialdietician;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -113,6 +114,9 @@ public class ViewFoodActivity extends AppCompatActivity {
 
                     if (ans != null) {
                         Toast.makeText(ViewFoodActivity.this, "Optimizing done!", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(ViewFoodActivity.this, OptimalFoodActivity.class);
+                        i.putExtra("ans", ans);
+                        startActivity(i);
                     } else {
                         Toast.makeText(ViewFoodActivity.this, "No solution found.", Toast.LENGTH_SHORT).show();
                     }

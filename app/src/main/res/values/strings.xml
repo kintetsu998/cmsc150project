@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Artificial Dietitian</string>
     <string name="title_activity_main">Main Menu</string>
-    <string name="view_previous_diet">View previous diet</string>
+    <string name="ultimate_optimizer">Ultimate Optimizer</string>
     <string name="create_new_diet">Create new diet</string>
     <string name="title_activity_view_food">Select Foods</string>
     <string name="add">+</string>
@@ -25,4 +25,6 @@
     <string name="select_all">Select All</string>
     <string name="unselect_all">Unselect All</string>
     <string name="optimize">Optimize</string>
+    <string name="title_activity_optimal_food">Optimal Amount</string>
+    <string name="go_back">Go Back to Main Menu</string>
 </resources>
