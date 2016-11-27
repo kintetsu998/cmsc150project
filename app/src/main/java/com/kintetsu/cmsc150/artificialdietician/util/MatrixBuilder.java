@@ -13,13 +13,10 @@ import java.util.ArrayList;
 
 public class MatrixBuilder {
     public static final String TAG = MatrixBuilder.class.getSimpleName();
-    private static Context c;
 
     public static double[][] buildTableu(String[] constraints, Context c, boolean minimization) {
-        MatrixBuilder.c = c;
         double[][] matrix = buildMatrix(constraints, minimization);
-
-        return null;
+        return createTableu(matrix, c);
     }
 
     public static double[][] buildTableu(ArrayList<Food> foodlist, Context c, boolean minimization) {
@@ -27,7 +24,7 @@ public class MatrixBuilder {
         return createTableu(matrix, c);
     }
 
-    public static double[][] createTableu(double[][] matrix, Context c) {
+    private static double[][] createTableu(double[][] matrix, Context c) {
         double[][] tableu = new double[matrix.length][matrix[0].length + matrix.length];
 
         for(int i = 0; i < matrix.length; i++) {
@@ -49,12 +46,12 @@ public class MatrixBuilder {
     private static double[][] buildMatrix(String[] constraints, boolean minimization) {
         String[] variables = getVariables(constraints[constraints.length-1]);
         ArrayList<double[]> coeffs = new ArrayList<>();
+        double[][] mat;
         String vars = "";
 
         for(String var : variables) {
             vars += var + " ";
         }
-
         Log.d(TAG, vars);
 
         for(String constraint : constraints) {
@@ -62,7 +59,12 @@ public class MatrixBuilder {
             coeffs.add(coeff);
         }
 
-        return coeffs.toArray(new double[1][1]);
+        mat = coeffs.toArray(new double[1][1]);
+        if(minimization) {
+            mat = transposeMatrix(mat);
+        }
+
+        return mat;
     }
 
     private static double[] getCoeff(String constraint, String[] vars) {
@@ -107,7 +109,7 @@ public class MatrixBuilder {
                 foundChar = false;
                 num = "";
                 var = "";
-            } else if(Character.isDigit(c) && !foundChar) {
+            } else if((Character.isDigit(c) || c == '.') && !foundChar) {
                 num += c;
             } else if(c == ' ' || c == '=') {
                 continue;
@@ -123,6 +125,10 @@ public class MatrixBuilder {
             for(int i=0; i<coeffs.length; i++) {
                 coeffs[i]  = (coeffs[i] == 0)? coeffs[i] : coeffs[i]*-1;
             }
+        } else {
+            Double d = Double.valueOf(num);
+            if(!isPositive) d*=-1;
+            coeffs[coeffs.length-1] = d;
         }
 
         for(double co : coeffs) {
