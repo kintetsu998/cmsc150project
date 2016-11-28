@@ -66,10 +66,4 @@ public class OptimalFoodActivity extends AppCompatActivity {
 
         return Math.round(totalCost*100.0)/100.0;
     }
-
-    /*private void showAns(double[] ans) {
-        for(double d : ans) {
-            Log.d(TAG, Double.toString(d));
-        }
-    }*/
 }

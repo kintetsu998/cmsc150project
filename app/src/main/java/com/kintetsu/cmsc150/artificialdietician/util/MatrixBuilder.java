@@ -37,7 +37,6 @@ public class MatrixBuilder {
         }
 
         FileUtil.clearFile();
-        FileUtil.writeTableu(matrix, c, "Initial Matrix");
         FileUtil.writeTableu(tableu, c, "Initial Tableu");
 
         return tableu;

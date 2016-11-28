@@ -302,5 +302,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:id="@+id/close"
-        android:background="@color/colorAccent" />
+        android:background="@android:color/darker_gray" />
 </RelativeLayout>

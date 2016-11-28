@@ -89,19 +89,19 @@
         android:id="@+id/button_panel"
         android:layout_marginTop="5dp">
         <Button
-            android:text="@string/optimize"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/optimize"
-            android:background="@color/colorAccent2"
-            android:layout_weight="1"
-            android:layout_margin="5dp" />
-        <Button
             android:text="@string/reset"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/reset"
             android:background="@android:color/darker_gray"
+            android:layout_weight="1"
+            android:layout_margin="5dp" />
+        <Button
+            android:text="@string/optimize"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/optimize"
+            android:background="@color/colorAccent2"
             android:layout_weight="1"
             android:layout_margin="5dp" />
     </LinearLayout>
