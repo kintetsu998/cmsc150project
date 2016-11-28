@@ -33,12 +33,6 @@ public class AddConstraintActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //TODO: Remove this code snippet
-        final ArrayList<String> initialConstraint = new ArrayList<>();
-        initialConstraint.add("60x+60y>=300");
-        initialConstraint.add("12x+6y>=36");
-        initialConstraint.add("10x+30y>=90");
-
         final Button add_obj =              (Button) findViewById(R.id.add_obj);
         final Button add_constraint =       (Button) findViewById(R.id.add_constraint);
         final Button reset =                (Button) findViewById(R.id.reset);
@@ -51,12 +45,11 @@ public class AddConstraintActivity extends AppCompatActivity {
 
         final RecyclerView constraint_rv = (RecyclerView) findViewById(R.id.constraint_rv);
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        final ConstraintAdapter constraintAdapter = new ConstraintAdapter(initialConstraint);
+        final ConstraintAdapter constraintAdapter = new ConstraintAdapter();
 
         constraint_rv.setLayoutManager(layoutManager);
         constraint_rv.setItemAnimator(new DefaultItemAnimator());
         constraint_rv.setAdapter(constraintAdapter);
-        obj_func_field.setText("0.12x+0.15y=w");
 
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
