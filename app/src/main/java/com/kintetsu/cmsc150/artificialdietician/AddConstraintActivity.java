@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 public class AddConstraintActivity extends AppCompatActivity {
     public static final String TAG = AddConstraintActivity.class.getSimpleName();
+    public static final int TEST_CASE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,8 @@ public class AddConstraintActivity extends AppCompatActivity {
 
         final RecyclerView constraint_rv = (RecyclerView) findViewById(R.id.constraint_rv);
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        final ConstraintAdapter constraintAdapter = new ConstraintAdapter();
+        final ArrayList<String> constraints = createTestCase(obj_func_field, TEST_CASE);
+        final ConstraintAdapter constraintAdapter = new ConstraintAdapter(constraints);
 
         constraint_rv.setLayoutManager(layoutManager);
         constraint_rv.setItemAnimator(new DefaultItemAnimator());
@@ -158,6 +160,44 @@ public class AddConstraintActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private ArrayList<String> createTestCase(EditText obj_func_field, int ctr) {
+        ArrayList<String> constraints = new ArrayList<>();
+        switch(ctr) {
+            case 1:
+                obj_func_field.setText("1a+2b+1c-1d=Z");
+                constraints.add("1a+1b+3c+4d<=60");
+                constraints.add("1b+2c+5d<=50");
+                constraints.add("2a+3b+6d<=72");
+                break;
+            case 2:
+                obj_func_field.setText("1a+0.5b+2.5c+3d=W");
+                constraints.add("1.5a+1b+2d>=35");
+                constraints.add("2b+6c+4d>=120");
+                constraints.add("1a+1b+1c+1d>=50");
+                constraints.add("0.5a+2.5c+1.5d>=75");
+                break;
+            case 3:
+                obj_func_field.setText("1a+1b+1c=W");
+                constraints.add("1a+2b+c>=30");
+                constraints.add("-6b-c>=-54");
+                constraints.add("1a+1b+2c>=20");
+                break;
+            case 4:
+                obj_func_field.setText("-200a-300b=Z");
+                constraints.add("-2a-3b<=-1200");
+                constraints.add("1a+1b<=400");
+                constraints.add("-2a-1.5b<=900");
+                break;
+            case 5:
+                obj_func_field.setText("0.12x+0.15y=w");
+                constraints.add("60x+60y>=300");
+                constraints.add("12x+6y>=36");
+                constraints.add("10x+30y>=90");
+                break;
+        }
+        return constraints;
     }
 
 }

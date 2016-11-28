@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 public class UltimateSolutionActivity extends AppCompatActivity {
     public static final String TAG = UltimateSolutionActivity.class.getSimpleName();
 
@@ -20,11 +22,12 @@ public class UltimateSolutionActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final Intent in = getIntent();
-        final double[] ans = in.getDoubleArrayExtra("ans");
         final String[] var = in.getStringArrayExtra("vars");
         final boolean minimization = in.getBooleanExtra("minimization", false);
         final TextView answer = (TextView) findViewById(R.id.answer);
         final Button go_back = (Button) findViewById(R.id.go_back);
+
+        double[] ans = in.getDoubleArrayExtra("ans");
 
         String ansStr= "";
 
@@ -34,8 +37,9 @@ public class UltimateSolutionActivity extends AppCompatActivity {
                     ansStr += var[i] + ": " + Double.toString(ans[i]) + "\n";
                 }
             } else {
-                for (int i = ans.length-var.length-1; i < ans.length-1; i++) {
-                    ansStr += var[i-var.length-1] + ": " + Double.toString(ans[i]) + "\n";
+                ans = Arrays.copyOfRange(ans,ans.length-var.length-1, ans.length);
+                for (int i = 0; i < var.length; i++) {
+                    ansStr += var[i] + ": " + Double.toString(ans[i]) + "\n";
                 }
             }
         } else {
