@@ -37,7 +37,7 @@ public class MatrixBuilder {
         }
 
         FileUtil.clearFile();
-        //FileUtil.writeTableu(matrix, c, "Initial Matrix");
+        FileUtil.writeTableu(matrix, c, "Initial Matrix");
         FileUtil.writeTableu(tableu, c, "Initial Tableu");
 
         return tableu;
@@ -172,9 +172,9 @@ public class MatrixBuilder {
         final int rows = 23 + 2*foodlist.size();
         final int cols = 1 + foodlist.size();
         double[][] matrix = new double[rows][cols];
+        int k = 0;
 
         for(int i = 0; i < rows; i++) {
-            int k = 0;
             if(i < 22) {
                 //for nutritional content
                 for (int j = 0; j < foodlist.size(); j++) {
@@ -191,7 +191,6 @@ public class MatrixBuilder {
                 }
 
                 matrix[i][cols-1] = Food.MIN_NUTRIENTS[i/2];
-                k = i-22;
             } else if(i < rows-1) {
                 //for serving constraint
                 matrix[i][k] = -1;

@@ -113,9 +113,11 @@ public class ViewFoodActivity extends AppCompatActivity {
                     double[] ans = Simplex.solve(tableu, ViewFoodActivity.this, true);
 
                     if (ans != null) {
-                        Toast.makeText(ViewFoodActivity.this, "Optimizing done!", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(ViewFoodActivity.this, OptimalFoodActivity.class);
+
                         i.putExtra("ans", ans);
+                        i.putExtra("foods", addedFood.toArray(new String[1]));
+
                         startActivity(i);
                         finish();
                     } else {

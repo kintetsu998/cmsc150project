@@ -5,6 +5,7 @@ import android.util.Log;
 
 public class Simplex {
     public static final String TAG = Simplex.class.getSimpleName();
+    public static final int MAX_ITER = 10000;
 
 	private double[] ans;
     private Context c;
@@ -21,6 +22,10 @@ public class Simplex {
 
         try {
             while ((pc = getPivotCol(tableu)) > -1) {
+				if(iter > MAX_ITER) {
+                    throw new RuntimeException("Max iteration reached.");
+                }
+
                 FileUtil.writeTableu(tableu, c, "Iteration " + iter);
                 FileUtil.writeBasicAns(this.ans, c);
 
@@ -38,6 +43,10 @@ public class Simplex {
         } catch(ArrayIndexOutOfBoundsException e) {
             Log.e(TAG, e.getMessage(), e);
             FileUtil.write("No possible solution.", c);
+            ans = null;
+        } catch(RuntimeException e) {
+            Log.e(TAG, e.getMessage(), e);
+            FileUtil.write("Max iteration reached. Stopping the process", c);
             ans = null;
         }
 	}

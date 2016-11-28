@@ -6,9 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+
+import com.kintetsu.cmsc150.artificialdietician.model.Food;
+import com.kintetsu.cmsc150.artificialdietician.util.Database;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class OptimalFoodActivity extends AppCompatActivity {
+    public static final String TAG = OptimalFoodActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +25,13 @@ public class OptimalFoodActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent i = getIntent();
-        String ans = parseAns((double[]) i.getExtras().get("ans"));
-        TextView answer = (TextView) findViewById(R.id.answer);
+        Database db = Database.getInstance(this);
+        ArrayList<Food> food = db.getFood(i.getStringArrayExtra("foods"));
+        double[] prevAns = i.getDoubleArrayExtra("ans");
+        double[] ans = Arrays.copyOfRange(prevAns, prevAns.length-food.size()-1, prevAns.length);
+
         Button go_back = (Button) findViewById(R.id.go_back);
 
-        answer.setText("answer: " + ans);
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,13 +40,9 @@ public class OptimalFoodActivity extends AppCompatActivity {
         });
     }
 
-    private String parseAns(double[] ans) {
-        String str = "";
-
+    /*private void showAns(double[] ans) {
         for(double d : ans) {
-            str = Double.toString(d) + " ";
+            Log.d(TAG, Double.toString(d));
         }
-
-        return str;
-    }
+    }*/
 }
