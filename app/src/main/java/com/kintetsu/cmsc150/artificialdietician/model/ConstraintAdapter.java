@@ -28,7 +28,7 @@ public class ConstraintAdapter extends RecyclerView.Adapter<ConstraintAdapter.Vi
     @Override
     public ConstraintAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.constraint_list_row, parent, false);
+                .inflate(R.layout.row_constraint_list, parent, false);
 
         return new ConstraintAdapter.ViewHolder(itemView);
     }

@@ -69,6 +69,10 @@ public class ViewFoodActivity extends AppCompatActivity {
             }
         });
 
+        foodRecyclerView.setLayoutManager(layoutManager);
+        foodRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        foodRecyclerView.setAdapter(foodAdapter);
+
         checkedAll = false;
 
         selectAll.setOnClickListener(new View.OnClickListener() {
@@ -128,10 +132,6 @@ public class ViewFoodActivity extends AppCompatActivity {
                 }
             }
         });
-
-        foodRecyclerView.setLayoutManager(layoutManager);
-        foodRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        foodRecyclerView.setAdapter(foodAdapter);
     }
 
     public ArrayList<String> getAddedFood() {
